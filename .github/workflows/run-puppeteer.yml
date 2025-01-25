@@ -3,6 +3,7 @@ name: Run Puppeteer Script
 on:
   schedule:
     - cron: "*/10 * * * *" # Runs every 10 minutes
+  workflow_dispatch: # Allows manual triggering of the workflow
 
 jobs:
   puppeteer-job:
