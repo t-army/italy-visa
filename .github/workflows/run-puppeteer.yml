@@ -1,0 +1,33 @@
+name: Run Puppeteer Script
+
+on:
+  schedule:
+    - cron: "*/10 * * * *" # Runs every 10 minutes
+
+jobs:
+  puppeteer-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout your code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Run Puppeteer script
+      - name: Run Puppeteer Script
+        env:
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_TO: ${{ secrets.TWILIO_TO }}
+          TWILIO_FROM: ${{ secrets.TWILIO_FROM }}
+        run: node main.js
