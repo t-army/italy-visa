@@ -100,5 +100,7 @@ if (!twilioAccountSid || !twilioAuthToken || !twilioTo || !twilioFrom) {
     });
 
     console.log(message.sid);
+  } else {
+    console.log("Not available!");
   }
 })();
