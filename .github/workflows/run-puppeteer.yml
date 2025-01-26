@@ -24,25 +24,20 @@ jobs:
         with:
           node-version: "18"
 
+      # Install Puppeteer dependencies
+      - name: Install Puppeteer Dependencies
+        run: sudo apt-get install -y libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libxcomposite1 libxrandr2 libxdamage1 libgbm1 libpango-1.0-0 libasound2
+
       # Install dependencies
       - name: Install Dependencies
         run: npm install
 
+      # Run Puppeteer script
       - name: Run Puppeteer Script
-        uses: run-with-xvfb
-        with:
-          run: node main.js
         env:
-          CI: true
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_TO: ${{ secrets.TWILIO_TO }}
           TWILIO_FROM: ${{ secrets.TWILIO_FROM }}
-
-      # - name: Run Puppeteer Script
-      #   env:
-      #     TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
-      #     TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
-      #     TWILIO_TO: ${{ secrets.TWILIO_TO }}
-      #     TWILIO_FROM: ${{ secrets.TWILIO_FROM }}
-      #   run: node main.js
+        run: |
+          xvfb-run --auto-servernum -- node main.js
