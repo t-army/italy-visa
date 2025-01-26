@@ -28,11 +28,21 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      # Run Puppeteer script
       - name: Run Puppeteer Script
+        uses: run-with-xvfb
+        with:
+          run: node main.js
         env:
+          CI: true
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           TWILIO_TO: ${{ secrets.TWILIO_TO }}
           TWILIO_FROM: ${{ secrets.TWILIO_FROM }}
-        run: node main.js
+
+      # - name: Run Puppeteer Script
+      #   env:
+      #     TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+      #     TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+      #     TWILIO_TO: ${{ secrets.TWILIO_TO }}
+      #     TWILIO_FROM: ${{ secrets.TWILIO_FROM }}
+      #   run: node main.js
