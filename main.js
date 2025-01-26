@@ -11,12 +11,6 @@ if (!twilioAccountSid || !twilioAuthToken || !twilioTo || !twilioFrom) {
   process.exit(1);
 }
 
-function delay(time) {
-  return new Promise(function (resolve) {
-    setTimeout(resolve, time);
-  });
-}
-
 (async () => {
   const { page, browser } = await connect({
     headless: false,
@@ -26,8 +20,6 @@ function delay(time) {
   await page.goto("https://ita-schengen.idata.com.tr/tr/appointment-form", {
     waitUntil: "networkidle0",
   });
-
-  await delay(10000);
 
   const csrfToken = await page.evaluate(() => {
     const metaTag = document.querySelector('meta[name="csrf-token"]');
