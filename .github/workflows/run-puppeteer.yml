@@ -14,19 +14,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Install required dependencies
-      - name: Install Xvfb
-        run: sudo apt-get update && sudo apt-get install -y xvfb
+        # Install xvfb and dependencies
+      - name: Install Xvfb and Puppeteer Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libxcomposite1 libxrandr2 libxdamage1 libgbm1 libpango-1.0-0 libasound2 fonts-liberation libappindicator3-1 xdg-utils
 
       # Set up Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
-
-      # Install Puppeteer dependencies
-      - name: Install Puppeteer Dependencies
-        run: sudo apt-get install -y libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libxcomposite1 libxrandr2 libxdamage1 libgbm1 libpango-1.0-0 libasound2
 
       # Install dependencies
       - name: Install Dependencies
