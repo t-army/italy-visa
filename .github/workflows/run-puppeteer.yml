@@ -7,7 +7,7 @@ on:
 
 jobs:
   puppeteer-job:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       # Checkout your code
